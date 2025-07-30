@@ -24,10 +24,10 @@ All within a time-efficient manner and presented in a user-friendly GUI
 
 ## 3 Deliverables
 
-| Deliverable                | Description                                                                        | Due Date     | Status          |
-|:---------------------------|:-----------------------------------------------------------------------------------|:------------:|:---------------:|
-| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | [YYYY-MM-DD] | In Progress |
-| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| Deliverable                | Description                                                                | Due Date             | Status          |
+|:---------------------------|:---------------------------------------------------------------------------|:--------------------:|:---------------:|
+| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | TBD | In Progress |
+| Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards | TBD | Not Started |
 | [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
 | [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
 | [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
