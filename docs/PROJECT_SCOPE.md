@@ -26,9 +26,9 @@ All within a time-efficient manner and presented in a user-friendly GUI
 | Deliverable                | Description                                                                        | Due Date     | Status          |
 |:---------------------------|:-----------------------------------------------------------------------------------|:------------:|:---------------:|
 | Project Scope Document     | A Markdown file that defines the project's purpose, background, objectives,        |              |                 |
-                             | deliverables, milestones in-scope vs. out-of-scope items, functional and           |              |                 |
-                             | non-functional requiremments, assumptions, constraints, risks & mitigation,        |              |                 |
-                             | and stakeholders.                                                                  | [YYYY-MM-DD] |                 |
+|                            | deliverables, milestones in-scope vs. out-of-scope items, functional and           |              |                 |
+|                            | non-functional requiremments, assumptions, constraints, risks & mitigation,        |              |                 |
+|                            | and stakeholders.                                                                  | [YYYY-MM-DD] |                 |
 | [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
 | [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
 | [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
