@@ -3,9 +3,9 @@
 ---
 
 ## 1. Project Overview
-**Project Name:** PDF Auditor
-**Prepared By:** Liam Slade
-**Date:** 07-30-2025
+## Project Name: PDF Auditor
+## Prepared By: Liam Slade
+## Date: 07-30-2025
 
 ## 1.1 Purpose 
 The PDF Auditor exists to give accessibility teams and website owners an easy-to-use desktop tool that automates end-to-end compliance checks on PDFs published on any public website. It combines web scraping, PDF retreival, and standard-based accessibility analysis all into a single GUI.
