@@ -3,9 +3,9 @@
 ---
 
 ## 1. Project Overview
-## Project Name: PDF Auditor
-## Prepared By: Liam Slade
-## Date: 07-30-2025
+**Project Name:** PDF Auditor<br>
+**Prepared By:** Liam Slade<br>
+**Date:** 07-30-2025<br>
 
 ## 1.1 Purpose 
 The PDF Auditor exists to give accessibility teams and website owners an easy-to-use desktop tool that automates end-to-end compliance checks on PDFs published on any public website. It combines web scraping, PDF retreival, and standard-based accessibility analysis all into a single GUI.
@@ -15,10 +15,10 @@ During my time at archSCAN LLC, I took lead on promoting and demonstrating one o
 
 ## 2. Objectives 
 This solution serves to: 
-    1. Discover all publicly-linked PDF documents on a target site via webscraping. 
-    2. Retrieve and download those PDFs to a specified directory 
-    3. Analyze each PDF for key accessibility criteria (PDF/UA and WCAG 2.1) 
-    4. Report results into an Excel workbook that which documents passed and failed
+    1. Discover all publicly-linked PDF documents on a target site via webscraping.<br> 
+    2. Retrieve and download those PDFs to a specified directory.<br>
+    3. Analyze each PDF for key accessibility criteria (PDF/UA and WCAG 2.1).<br>
+    4. Report results into an Excel workbook that which documents passed and failed.<br>
 
 All within a time-efficient manner and presented in a user-friendly GUI
 
