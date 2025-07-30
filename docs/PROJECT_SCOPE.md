@@ -14,7 +14,7 @@ The PDF Auditor exists to give accessibility teams and website owners an easy-to
 During my time at archSCAN LLC, I took lead on promoting and demonstrating one of our new services: Accessibility-on-Demand (AoD). This on-demand service provided a much more cost effective and time efficient way to remediate documents by utilizing artificial intelligence, machine learning, and computer vision. One of the ways I went about promoting and demonstrating this service was when we had a lead/potential client, I would grab any public facing documentation from their organization's website and check for compliance (any documentation that I would find to be non-compliant would then be used in demonstrating AoD). When doing so, I found that manually going through a website and downloading every PDF I found was very time-consuming and inefficient.  
 
 ## 2. Objectives 
-This solution serves to: 
+This solution serves to:<br> 
     1. Discover all publicly-linked PDF documents on a target site via webscraping.<br> 
     2. Retrieve and download those PDFs to a specified directory.<br>
     3. Analyze each PDF for key accessibility criteria (PDF/UA and WCAG 2.1).<br>
@@ -23,23 +23,26 @@ This solution serves to:
 All within a time-efficient manner and presented in a user-friendly GUI
 
 ## 3 Deliverables
-| Deliverable                | Description                      | Due Date     | Status          |
-|:---------------------------|:---------------------------------|:------------:|:---------------:|
-| Project Scope Document     | A Markdown file that defines the project's purpose, background, objectives, deliverables, milestones in-scope vs. out-of-scope items, functional and non-functional requiremments, assumptions, constraints, risks & mitigation, and stakeholders.  | [YYYY-MM-DD] |
-| [Deliverable 2]            | [Description of deliverable 2]   | [YYYY-MM-DD] |
-| [Deliverable 3]            | [Description of deliverable 3]   | [YYYY-MM-DD] |
-| [Deliverable 1]            | [Description of deliverable 1]   | [YYYY-MM-DD] |
-| [Deliverable 2]            | [Description of deliverable 2]   | [YYYY-MM-DD] |
-| [Deliverable 3]            | [Description of deliverable 3]   | [YYYY-MM-DD] |
-| [Deliverable 1]            | [Description of deliverable 1]   | [YYYY-MM-DD] |
-| [Deliverable 2]            | [Description of deliverable 2]   | [YYYY-MM-DD] |
-| [Deliverable 3]            | [Description of deliverable 3]   | [YYYY-MM-DD] |
-| [Deliverable 1]            | [Description of deliverable 1]   | [YYYY-MM-DD] |
-| [Deliverable 2]            | [Description of deliverable 2]   | [YYYY-MM-DD] |
-| [Deliverable 3]            | [Description of deliverable 3]   | [YYYY-MM-DD] |
-| [Deliverable 1]            | [Description of deliverable 1]   | [YYYY-MM-DD] |
-| [Deliverable 2]            | [Description of deliverable 2]   | [YYYY-MM-DD] |
-| [Deliverable 3]            | [Description of deliverable 3]   | [YYYY-MM-DD] |
+| Deliverable                | Description                                                                        | Due Date     | Status          |
+|:---------------------------|:-----------------------------------------------------------------------------------|:------------:|:---------------:|
+| Project Scope Document     | A Markdown file that defines the project's purpose, background, objectives,        |              |                 |
+                             | deliverables, milestones in-scope vs. out-of-scope items, functional and           |              |                 |
+                             | non-functional requiremments, assumptions, constraints, risks & mitigation,        |              |                 |
+                             | and stakeholders.                                                                  | [YYYY-MM-DD] |                 |
+| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
+| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
 
 # 4. Milestones
 | Milestone                  | Target Date   | Owner         |
