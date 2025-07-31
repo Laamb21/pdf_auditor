@@ -67,9 +67,25 @@ All within a time-efficient manner and presented in a user-friendly GUI
  - Support for mobile platforms
 
 ## 6. Requirements 
-## 6.1 Functional Requirements 
+
+## 6.1 Functional Requirements
+ - The system shall discover all publicly-linked PDF documents on a specified website via web scraping.
+ - The system shall download and store discovered PDFs in a user-specified local directory.
+ - The system shall analyze each PDF for compliance with PDF/UA and WCAG 2.1 accessibility standards.
+ - The system shall generate an Excel report summarizing the compliance results for each PDF.
+ - The system shall provide a graphical user interface (GUI) for initiating scans, viewing results, and exporting reports.
+ - The system shall allow users to configure scan parameters (e.g., target URL, output directory).
+ - The system shall provide user documentation for installation, usage, and troubleshooting.
+ - The system shall include automated and manual tests for all major features.
 
 ## 6.2 Non-Functional Requirements
+ - The system shall complete PDF discovery, download, and analysis for a typical website (up to 100 PDFs) within 30 minutes.
+ - The system shall support Windows 10 and above.
+ - The system shall provide clear error messages and logging for failed operations.
+ - The system shall ensure user data privacy and not transmit PDFs or results externally.
+ - The system shall be maintainable and modular for future feature additions.
+ - The system shall have a user-friendly and accessible GUI (meeting WCAG 2.1 AA for software interfaces).
+ - The system shall require minimal installation steps and dependencies.
 
 ## 7 Assuptions & Constraints
 ## 7.1 Assumptions 
