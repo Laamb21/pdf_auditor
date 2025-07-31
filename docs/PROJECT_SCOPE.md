@@ -88,10 +88,22 @@ All within a time-efficient manner and presented in a user-friendly GUI
  - The system shall require minimal installation steps and dependencies.
 
 ## 7 Assuptions & Constraints
-## 7.1 Assumptions 
+## 7.1 Assumptions
+ - Target websites have publicly accessible PDF links that can be discovered via web scraping.
+ - Users have the necessary permissions to download and analyze PDFs from target websites.
+ - The majority of target PDFs are not password-protected or encrypted.
+ - Users will operate the application on supported Windows environments.
+ - Internet connectivity is available during PDF discovery and download.
+ - Users will provide accurate URLs and output directories.
 
 ## 7.2 Constraints
-
+ - The application is limited to Windows 10 and above.
+ - Only publicly accessible, non-password-protected PDFs can be analyzed.
+ - The system does not modify or remediate PDF content.
+ - The application does not support real-time website monitoring or cloud deployment.
+ - Maximum recommended website size for analysis is 100 PDFs per scan.
+ - The application must comply with relevant data privacy regulations (e.g., GDPR).
+ 
 ## 8. Risk & Mitigation
 | Risk                        | Probability    | Impact         | Mitigation Plan              |
 |-----------------------------|----------------|----------------|------------------------------|
