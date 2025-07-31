@@ -114,9 +114,16 @@ All within a time-efficient manner and presented in a user-friendly GUI
 | Limited platform support | Medium | Medium | Clearly document OS requirements; consider future cross-platform development. |
 | User error (e.g., incorrect URLs, permissions) | Medium | Low | Provide clear instructions, error messages, and documentation. |
 
-## 9. Stakeholders 
-| Stakeholder                 | Role             | Contact Info         |
-|-----------------------------|------------------|----------------------|
-| [Name / Team]               | [Role]           | [email@example.com]  |
-| [Name / Team]               | [Role]           | [email@example.com]  |
+## 9. Success Criteria 
 
+The success of the PDF Auditor project will be measured by the following criteria:
+
+- The application reliably discovers, downloads, and analyzes publicly-linked PDFs from target websites.
+- At least 95% of accessible PDFs on tested sites are successfully discovered and processed.
+- Accessibility analysis results are accurate and align with manual spot checks (less than 5% false positives/negatives).
+- Excel reports are generated correctly and are easy to interpret by stakeholders.
+- The GUI is user-friendly and receives positive feedback from at least 80% of pilot users.
+- The application completes analysis for a typical website (up to 100 PDFs) within 30 minutes.
+- No sensitive user or document data is transmitted externally; all processing is local.
+- User documentation enables new users to install and operate the application without external support.
+- All major features pass automated and manual QA tests prior to release.
