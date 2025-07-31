@@ -1,0 +1,35 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment
+.env
+
+# Reports
+*.xlsx
+
+# Misc
+*.bak
+*.swp
+
+# Ignore test coverage and build artifacts
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Ignore PDFs downloaded by the app
+pdf_downloads/
