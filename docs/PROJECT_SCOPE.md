@@ -48,11 +48,23 @@ All within a time-efficient manner and presented in a user-friendly GUI
  | Final Release                          | 2025-09-30    | Liam Slade      |
 
 ## 5. Scope Description 
+
 ## 5.1 In Scope
-- [Feature / task in scope]
+ - Automated discovery of publicly-linked PDF documents on target websites
+ - Downloading and local storage of discovered PDFs
+ - Accessibility analysis of PDFs for PDF/UA and WCAG 2.1 compliance
+ - Generation of Excel reports summarizing compliance results
+ - User-friendly desktop GUI for all major workflows
+ - User documentation (installation, usage, troubleshooting)
+ - Automated and manual testing of all major features
 
 ## 5.2 Out of Scope
-- [Feature/ task out of scope]
+ - Remediation or editing of PDF content for compliance
+ - Accessibility analysis of non-PDF file formats
+ - Web-based/cloud deployment of the application
+ - Integration with third-party document management systems
+ - Real-time monitoring of website changes
+ - Support for mobile platforms
 
 ## 6. Requirements 
 ## 6.1 Functional Requirements 
