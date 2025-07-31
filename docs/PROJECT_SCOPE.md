@@ -37,15 +37,15 @@ All within a time-efficient manner and presented in a user-friendly GUI
 # 4. Milestones
 | Milestone                  | Target Date   | Owner         |
 |----------------------------|---------------|---------------|
-| [Milestone 1]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 2]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 3]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 1]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 2]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 3]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 1]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 2]              | [YYYY-MM-DD]  | [Name]        |
-| [Milestone 3]              | [YYYY-MM-DD]  | [Name]        |
+ | Project Scope & Planning Complete      | 2025-08-05    | Liam Slade      |
+ | Technical Requirements Finalized       | 2025-08-12    | Liam Slade      |
+ | Web Scraper Module Developed           | 2025-08-19    | Liam Slade      |
+ | Accessibility Analysis Engine Complete | 2025-08-26    | Liam Slade      |
+ | GUI Prototype Ready                    | 2025-09-02    | Liam Slade      |
+ | Reporting System Implemented           | 2025-09-09    | Liam Slade      |
+ | User Documentation Drafted             | 2025-09-16    | Liam Slade      |
+ | QA & Testing Complete                  | 2025-09-23    | Liam Slade      |
+ | Final Release                          | 2025-09-30    | Liam Slade      |
 
 ## 5. Scope Description 
 ## 5.1 In Scope
