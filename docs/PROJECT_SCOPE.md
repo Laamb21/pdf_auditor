@@ -27,20 +27,12 @@ All within a time-efficient manner and presented in a user-friendly GUI
 | Deliverable                | Description                                                                | Due Date             | Status          |
 |:---------------------------|:---------------------------------------------------------------------------|:--------------------:|:---------------:|
 | Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | TBD | In Progress |
-| Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards | TBD | Not Started |
-| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 1]            | [Description of deliverable 1]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 2]            | [Description of deliverable 2]                                                     | [YYYY-MM-DD] |                 |
-| [Deliverable 3]            | [Description of deliverable 3]                                                     | [YYYY-MM-DD] |                 |
+| Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards. | TBD | Not Started |
+| Web Scraper Module | Component to discover and retrieve all publicly-linked PDFs from a target website. | TBD | Not started |
+| Accessibility Analysis Engine | Module to analyze PDFs for PDF/UA and WCAG 2.1 compliance. | TBD | Not started |
+| GUI Application | User-friendly desktop interface integrating all modules and workflows. | TBD | Not started |
+| Reporting System | Generates Excel reports summarizing compliance results for all analyzed PDFs. | TBD | Not started |
+| User Documentation | Guides for installation, usage, troubleshooting, and support. | TBD | Not started |
 
 # 4. Milestones
 | Milestone                  | Target Date   | Owner         |
@@ -88,4 +80,3 @@ All within a time-efficient manner and presented in a user-friendly GUI
 | [Name / Team]               | [Role]           | [email@example.com]  |
 | [Name / Team]               | [Role]           | [email@example.com]  |
 
-## 
