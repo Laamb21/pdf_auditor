@@ -23,5 +23,9 @@ url_label.grid(row=0, column=0, sticky="w")
 url_entry = tk.Entry(top_frame)
 url_entry.grid(row=0, column=1, sticky="ew", padx=(10, 0))
 
+# Button to scrape website
+scrape_button = tk.Button(top_frame, text="Scrape Website")
+scrape_button.grid(row=0, column=2, padx=(10, 0), sticky="ew")
+
 #Start Tkinter event loop
 root.mainloop()
