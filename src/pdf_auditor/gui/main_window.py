@@ -7,7 +7,5 @@ root = tk.Tk()
 root.title("PDF Auditor")
 root.geometry("800x600")
 
-#
-
 #Start Tkinter event loop
 root.mainloop()
