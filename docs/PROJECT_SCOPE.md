@@ -15,10 +15,10 @@ During my time at archSCAN LLC, I took lead on promoting and demonstrating one o
 
 ## 2. Objectives 
 This solution serves to:<br> 
-    1. Discover all publicly-linked PDF documents on a target site via webscraping. 
-    2. Retrieve and download those PDFs to a specified directory 
-    3. Analyze each PDF for key accessibility criteria (PDF/UA and WCAG 2.1) 
-    4. Report results into an Excel workbook that which documents passed and failed
+    1. Discover all publicly-linked PDF documents on a target site via webscraping.<br> 
+    2. Retrieve and download those PDFs to a specified directory.<br>
+    3. Analyze each PDF for key accessibility criteria (PDF/UA and WCAG 2.1).<br> 
+    4. Report results into an Excel workbook that which documents passed and failed.<br>
 
 All within a time-efficient manner and presented in a user-friendly GUI
 
