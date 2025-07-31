@@ -103,16 +103,16 @@ All within a time-efficient manner and presented in a user-friendly GUI
  - The application does not support real-time website monitoring or cloud deployment.
  - Maximum recommended website size for analysis is 100 PDFs per scan.
  - The application must comply with relevant data privacy regulations (e.g., GDPR).
- 
+
 ## 8. Risk & Mitigation
 | Risk                        | Probability    | Impact         | Mitigation Plan              |
 |-----------------------------|----------------|----------------|------------------------------|
-| [Risk 1]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
-| [Risk 2]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
-| [Risk 1]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
-| [Risk 2]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
-| [Risk 1]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
-| [Risk 2]                    | [Low/Med/High] | [Low/Med/High] | [Mitigation strategy]        |
+| Incomplete PDF discovery due to website structure changes | Medium | High | Regularly update and test web scraping logic; allow user feedback for missed files. |
+| Download failures or inaccessible PDFs | Medium | Medium | Implement robust error handling and retry logic; log failures for user review. |
+| False positives/negatives in accessibility analysis | Low | High | Use reliable libraries and validate results with manual spot checks. |
+| Data privacy concerns | Low | High | Ensure all processing is local; do not transmit PDFs or results externally. |
+| Limited platform support | Medium | Medium | Clearly document OS requirements; consider future cross-platform development. |
+| User error (e.g., incorrect URLs, permissions) | Medium | Low | Provide clear instructions, error messages, and documentation. |
 
 ## 9. Stakeholders 
 | Stakeholder                 | Role             | Contact Info         |
