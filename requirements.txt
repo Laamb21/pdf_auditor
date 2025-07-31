@@ -1,0 +1,6 @@
+# Core dependencies for PDF Auditor
+requests
+beautifulsoup4
+openpyxl
+PyPDF2
+tkinter
