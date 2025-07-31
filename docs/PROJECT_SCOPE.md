@@ -26,7 +26,7 @@ All within a time-efficient manner and presented in a user-friendly GUI
 
 | Deliverable                | Description                                                                | Due Date             | Status          |
 |:---------------------------|:---------------------------------------------------------------------------|:--------------------:|:---------------:|
-| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | TBD | In Progress |
+| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | TBD | Pending Review |
 | Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards. | TBD | Not Started |
 | Web Scraper Module | Component to discover and retrieve all publicly-linked PDFs from a target website. | TBD | Not started |
 | Accessibility Analysis Engine | Module to analyze PDFs for PDF/UA and WCAG 2.1 compliance. | TBD | Not started |
