@@ -36,6 +36,62 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
     robots_txt = fetch_robots_txt(domain)
     sitemap_urls, disallows = parse_robots_txt(robots_txt)
 
+    #2. Fallback sitemap if none
+    if not sitemap_urls:
+        sitemap_urls = [f"https://{domain}/sitemap.xml"]
+
+    # 3. Expand nested sitemap indexes
+    final_sitemaps = []
+    for sm_url in sitemap_urls:
+        try:
+            raw = fetch(sm_url)
+            xml = maybe_decompress(raw)
+            if b'<sitemapindex' in xml:
+                final_sitemaps += parse_sitemapindex(xml)
+            else:
+                final_sitemaps.append(sm_url)
+        except Exception as e:
+            logger.warning(f"Failed to fetch/parse sitemap {sm_url}: {e}")
+
+    # 4. Collect URLs
+    all_urls = set()
+    for sm in final_sitemaps:
+        try:
+            raw = fetch(sm)
+            xml = maybe_decompress(raw)
+            locs = parese_sitemap_xml(xml)
+            all_urls.update(locs)
+        except Exception as e:
+            logger.warning(f"Error parsing sitemap {sm}: {e}")
+
+    # 5. Filter by domain and disallows
+    pdf_urls, html_urls = [], []
+    for url in all_urls:
+        p = urlparse(url)
+        if p.netloc != domain:
+            continue
+        if any(p.path.startswith(d) for d in disallows):
+            logger.info(f"Skipping disallowed path: {url}")
+            continue
+        if p.path.lower().endswith('.pdf'):
+            pdf_urls.append(url)
+        else:
+            html_urls.append(url)
+    
+    # Manifest for tracking
+    manifest = {}
+
+    # 6. Download PDFs from sitemap
+    for url in pdf_urls:
+        record = download_and_save_pdf(url, base_output)
+        manifest[url] = record
+        time.sleep(RATE_LIMIT)
+
+    # 7. Crawl HTML pages for embedded PDFs
+    
+
+
+
 # Helper functions
 
 def fetch(url: str) -> bytes:
@@ -61,3 +117,95 @@ def parse_robots_txt(text: str):
             if path:
                 disallows.append(path)
     return sitemaps, disallows
+
+def maybe_decompress(raw: bytes) -> bytes:
+    # Detect and decompress .gz
+    if raw[:2] == b'\x1f\x8b':
+        buf = io.BytesIO(raw)
+        with gzip.GzipFile(fileobj=buf) as gz:
+            return gz.read()
+    return raw
+
+def parese_sitemap_xml(xml: bytes) -> list:
+    tree = ElementTree.fromstring(xml)
+    return [elem.text for elem in tree.findall('.//{https://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+
+def parse_sitemapindex(xml: bytes) -> list:
+    tree = ElementTree.fromstring(xml)
+    return [elem.text for elem in tree.findall('.//{https://www.sitemaps.org/schemas/sitemap/0.9}sitemap/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+
+def parse_html_links(html: str) -> list:
+    soup = BeautifulSoup(html, 'html.parser')
+    return [a.get('href') for a in soup.find_all('a', href=True)]
+
+def download_and_save_pdf(url: str, output_dir: Path) -> dict:
+    record = {'path': None, 'status': None, 'error': None}
+    try:
+        # HEAD check
+        h = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=10)
+        if 'application/pdf' not in h.headers.get('Content-Type', ''):
+            record['status'] = 'skipped_non_pdf'
+            logger.info(f"Skipping non-PDF: {url}")
+            return record
+        
+        # Prepare local path
+        parsed = urlparse(url)
+        local_path = output_dir / parsed.path.lstrip('/')
+        local_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Doanload 
+        with requests.get(url, headers={'User-Agent': USER_AGENT}, stream=True, timeout=20) as r:
+            r.raise_for_status()
+            with open(local_path, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        record['path'] = str(local_path)
+        record['status'] = 'downlaoded'
+
+        # Validate
+        if not validate_pdf_file(local_path):
+            record['status'] = 'invalid_pdf'
+            logger.warning(f"Invalid PDF file: {local_path}")
+        else:
+            logger.info(f"Downloaded: {url} -> {local_path}")
+    except Exception as e:
+        record['error'] = str(e)
+        logger.error(f"Error downloading {url}: {e}")
+    return record
+
+def validate_pdf_file(path: Path) -> bool:
+    try:
+        with open(path, 'rb') as f:
+            reader = PyPDF2.PdfReader(f)
+            # Try reading number of pages
+            _ = len(reader.pages)
+        return True
+    except Exception as e:
+        return False
+    
+def crawl_for_pdfs(start_url: str, output_dir: Path, disallows: list, manifest: dict):
+    queue = [(start_url, 0)]
+    visited = set()
+    while queue:
+        url, depth = queue.pop(0)
+        if depth > MAX_CRAWL_DEPTH or url in visited:
+            continue
+        visited.add(url)
+        try:
+            html = fetch(url).decode('utf-8', errors='ignore')
+            links = parse_html_links(html)
+            for href in links:
+                abs_url = urljoin(url, href)
+                p = urlparse(abs_url)
+                if p.netloc != urlparse(start_url).netloc:
+                    continue
+                if any(p.path.startswith(d) for d in disallows):
+                    continue
+                if p.path.lower().endswith('.pdf'):
+                    record = download_and_save_pdf(abs_url, output_dir)
+                    manifest[abs_url] = record
+                    time.sleep(RATE_LIMIT)
+                else:
+                    queue.append((abs_url, depth + 1))
+        except Exception as e:
+            logger.warning(f"Crawl error at {url}: {e}")
