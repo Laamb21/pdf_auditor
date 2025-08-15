@@ -5,7 +5,7 @@
 ## 1. Project Overview
 **Project Name:** PDF Auditor<br>
 **Prepared By:** Liam Slade<br>
-**Date:** 08-15-2025
+**Date:** 08/15/2025
 
 ## 1.1 Purpose 
 The PDF Auditor exists to give accessibility teams and website owners an easy-to-use desktop tool that automates end-to-end compliance checks on PDFs published on any public website. It combines web scraping, PDF retreival, and standard-based accessibility analysis all into a single GUI.
@@ -26,8 +26,8 @@ All within a time-efficient manner and presented in a user-friendly GUI
 
 | Deliverable                | Description                                                                | Due Date             | Status          |
 |:---------------------------|:---------------------------------------------------------------------------|:--------------------:|:---------------:|
-| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | 8-18-2025 | In Progress |
-| Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards. | 8-18-2025 | In Progress |
+| Project Scope Document | A Markdown file that defines the projects purpose, background, objectives, deliverables, milestones, in-scope and out-of-scope featuers, functional and non-functional requirements, assumptions, constraints, risk & mitigation plans, and stakeholders. | 8/18/2025 | In Progress |
+| Technical Requirements Specifications | A detailed spec outlining data inputs/outputs, performance targets, and compliance standards. | 8/18/2025 | In Progress |
 | Web Scraper Module | Component to discover and retrieve all publicly-linked PDFs from a target website. | 8/22/2025 | Not started |
 | Accessibility Analysis Engine | Module to analyze PDFs for PDF/UA and WCAG 2.1 compliance. | TBD | Not started |
 | GUI Application | User-friendly desktop interface integrating all modules and workflows. | TBD | Not started |
