@@ -88,7 +88,32 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
         time.sleep(RATE_LIMIT)
 
     # 7. Crawl HTML pages for embedded PDFs
-    
+    for page_url in html_urls:
+        try:
+            html = fetch(page_url).decode('utf-8', errors='ignore')
+            links = parse_html_links(html)
+            for href in links:
+                if '.pdf' in href.lower():
+                    pdf_link = url.join(page_url, href)
+                    p = urlparse(pdf_link)
+                    if p.netloc != domain or any(p.path.startswith(d) for d in disallows):
+                        continue
+                    record = download_and_save_pdf(pdf_link, base_output)
+                    manifest[pdf_link] = record
+                    time.sleep(RATE_LIMIT)
+        except Exception as e:
+            logger.warning(f"Failed to crawl HTML {page_url}: {e}")
+
+    # 8 Optional fallback crawl
+    if not final_sitemaps or (len(pdf_urls) + len(html_urls) == 0):
+        logger.info("No sitemaps or URLs found; falling back to crawl")
+        crawl_for_pdfs(start_url, base_output, disallows, manifest)
+
+    # 9 Write manifest 
+    manifest_path = base_output / 'manifest.json'
+    with open(manifest_path, 'w', encoding='utf-8') as f:
+        json.dump(manifest, f, indent=2)
+    logger.info(f"Mainfest written to {manifest_path}")
 
 
 
@@ -209,3 +234,11 @@ def crawl_for_pdfs(start_url: str, output_dir: Path, disallows: list, manifest: 
                     queue.append((abs_url, depth + 1))
         except Exception as e:
             logger.warning(f"Crawl error at {url}: {e}")
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="PDF Auditor: sitemap-driven PDF scraper")
+    parser.add_argument('start_url', help='Starting URL of the website to scrape')
+    parser.add_argument('output_dir', help='Directory to save downloaded PDFs')
+    args = parser.parse_args()
+    scrape_pdfs(args.start_url, args.output_dir)
