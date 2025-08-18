@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 import PyPDF2
 
 # Configuration
-CACERT_PATH = "F:/pdf_auditor/src/pdf_auditor/utils/cacert.pem"
+CACERT_PATH = "F:/pdf_auditor/src/pdf_auditor/utils/certs/cacert.pem"
 USER_AGENT = "PDFAuditorBot/1.0"
 RATE_LIMIT = 1  # seconds between requests
 MAX_CRAWL_DEPTH = 2
