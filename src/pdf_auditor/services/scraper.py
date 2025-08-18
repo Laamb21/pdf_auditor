@@ -9,11 +9,12 @@ from pathlib import Path
 from urllib.parse import urljoin, urlparse
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup
-import PyPDF2 
+import PyPDF2
 
-# Configuration 
+# Configuration
+CACERT_PATH = "F:/pdf_auditor/src/pdf_auditor/utils/cacert.pem"
 USER_AGENT = "PDFAuditorBot/1.0"
-RATE_LIMIT = 1 # seconds between requests
+RATE_LIMIT = 1  # seconds between requests
 MAX_CRAWL_DEPTH = 2
 
 # Initialize logger
@@ -22,10 +23,11 @@ logging.basicConfig(
 )
 logger = logging.getLogger("pdf_auditor")
 
+
 def scrape_pdfs(start_url: str, output_dir: str) -> None:
-    '''
-    Main entry point: discovers PDFs via sitemap or crawl and downloads them
-    '''
+    """
+    Main entry point: discovers PDFs via sitemap or crawl and downloads them.
+    """
     # Prepare
     parsed = urlparse(start_url)
     domain = parsed.netloc
@@ -36,11 +38,11 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
     robots_txt = fetch_robots_txt(domain)
     sitemap_urls, disallows = parse_robots_txt(robots_txt)
 
-    #2. Fallback sitemap if none
+    # 2. Fallback sitemap if none
     if not sitemap_urls:
         sitemap_urls = [f"https://{domain}/sitemap.xml"]
 
-    # 3. Expand nested sitemap indexes
+    # 3. Expand nested sitemapindexes
     final_sitemaps = []
     for sm_url in sitemap_urls:
         try:
@@ -59,7 +61,7 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
         try:
             raw = fetch(sm)
             xml = maybe_decompress(raw)
-            locs = parese_sitemap_xml(xml)
+            locs = parse_sitemap_xml(xml)
             all_urls.update(locs)
         except Exception as e:
             logger.warning(f"Error parsing sitemap {sm}: {e}")
@@ -77,7 +79,7 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
             pdf_urls.append(url)
         else:
             html_urls.append(url)
-    
+
     # Manifest for tracking
     manifest = {}
 
@@ -94,7 +96,7 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
             links = parse_html_links(html)
             for href in links:
                 if '.pdf' in href.lower():
-                    pdf_link = url.join(page_url, href)
+                    pdf_link = urljoin(page_url, href)
                     p = urlparse(pdf_link)
                     if p.netloc != domain or any(p.path.startswith(d) for d in disallows):
                         continue
@@ -104,26 +106,26 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
         except Exception as e:
             logger.warning(f"Failed to crawl HTML {page_url}: {e}")
 
-    # 8 Optional fallback crawl
+    # 8. Optional fallback crawl
     if not final_sitemaps or (len(pdf_urls) + len(html_urls) == 0):
         logger.info("No sitemaps or URLs found; falling back to crawl")
         crawl_for_pdfs(start_url, base_output, disallows, manifest)
 
-    # 9 Write manifest 
+    # 9. Write manifest
     manifest_path = base_output / 'manifest.json'
     with open(manifest_path, 'w', encoding='utf-8') as f:
         json.dump(manifest, f, indent=2)
-    logger.info(f"Mainfest written to {manifest_path}")
-
+    logger.info(f"Manifest written to {manifest_path}")
 
 
 # Helper functions
 
 def fetch(url: str) -> bytes:
     headers = {'User-Agent': USER_AGENT}
-    resp = requests.get(url, headers=headers, timeout=10)
+    resp = requests.get(url, headers=headers, timeout=10, verify=CACERT_PATH)
     resp.raise_for_status()
     return resp.content
+
 
 def fetch_robots_txt(domain: str) -> str:
     try:
@@ -131,17 +133,19 @@ def fetch_robots_txt(domain: str) -> str:
         return content
     except Exception:
         return ''
-    
+
+
 def parse_robots_txt(text: str):
     sitemaps, disallows = [], []
     for line in text.splitlines():
         if line.lower().startswith('sitemap:'):
-            sitemaps.append(line.split(":",1)[1].strip())
+            sitemaps.append(line.split(':',1)[1].strip())
         elif line.lower().startswith('disallow:'):
             path = line.split(':',1)[1].strip()
             if path:
                 disallows.append(path)
     return sitemaps, disallows
+
 
 def maybe_decompress(raw: bytes) -> bytes:
     # Detect and decompress .gz
@@ -151,41 +155,45 @@ def maybe_decompress(raw: bytes) -> bytes:
             return gz.read()
     return raw
 
-def parese_sitemap_xml(xml: bytes) -> list:
+
+def parse_sitemap_xml(xml: bytes) -> list:
     tree = ElementTree.fromstring(xml)
-    return [elem.text for elem in tree.findall('.//{https://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+    return [elem.text for elem in tree.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+
 
 def parse_sitemapindex(xml: bytes) -> list:
     tree = ElementTree.fromstring(xml)
-    return [elem.text for elem in tree.findall('.//{https://www.sitemaps.org/schemas/sitemap/0.9}sitemap/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+    return [elem.text for elem in tree.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}sitemap/{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
+
 
 def parse_html_links(html: str) -> list:
     soup = BeautifulSoup(html, 'html.parser')
     return [a.get('href') for a in soup.find_all('a', href=True)]
 
+
 def download_and_save_pdf(url: str, output_dir: Path) -> dict:
     record = {'path': None, 'status': None, 'error': None}
     try:
         # HEAD check
-        h = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=10)
+        h = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=10, verify=CACERT_PATH)
         if 'application/pdf' not in h.headers.get('Content-Type', ''):
             record['status'] = 'skipped_non_pdf'
             logger.info(f"Skipping non-PDF: {url}")
             return record
-        
+
         # Prepare local path
         parsed = urlparse(url)
         local_path = output_dir / parsed.path.lstrip('/')
         local_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Doanload 
-        with requests.get(url, headers={'User-Agent': USER_AGENT}, stream=True, timeout=20) as r:
+        # Download
+        with requests.get(url, headers={'User-Agent': USER_AGENT}, stream=True, timeout=20, verify=CACERT_PATH) as r:
             r.raise_for_status()
             with open(local_path, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
                     f.write(chunk)
         record['path'] = str(local_path)
-        record['status'] = 'downlaoded'
+        record['status'] = 'downloaded'
 
         # Validate
         if not validate_pdf_file(local_path):
@@ -198,6 +206,7 @@ def download_and_save_pdf(url: str, output_dir: Path) -> dict:
         logger.error(f"Error downloading {url}: {e}")
     return record
 
+
 def validate_pdf_file(path: Path) -> bool:
     try:
         with open(path, 'rb') as f:
@@ -205,9 +214,10 @@ def validate_pdf_file(path: Path) -> bool:
             # Try reading number of pages
             _ = len(reader.pages)
         return True
-    except Exception as e:
+    except Exception:
         return False
-    
+
+
 def crawl_for_pdfs(start_url: str, output_dir: Path, disallows: list, manifest: dict):
     queue = [(start_url, 0)]
     visited = set()
@@ -235,6 +245,8 @@ def crawl_for_pdfs(start_url: str, output_dir: Path, disallows: list, manifest: 
         except Exception as e:
             logger.warning(f"Crawl error at {url}: {e}")
 
+
+# Example usage:
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="PDF Auditor: sitemap-driven PDF scraper")

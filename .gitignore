@@ -33,3 +33,11 @@ build/
 
 # Ignore PDFs downloaded by the app
 pdf_downloads/
+
+# Ignore certs
+certs/
+
+#Ignore configs
+config/
+
+# Ignore tests
