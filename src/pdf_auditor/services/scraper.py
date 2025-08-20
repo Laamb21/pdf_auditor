@@ -10,12 +10,19 @@ from urllib.parse import urljoin, urlparse
 from xml.etree import ElementTree
 from bs4 import BeautifulSoup
 import PyPDF2
+import urllib3
+
+# Disable SSL warnings for domains with known certificate issues
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Configuration
 CACERT_PATH = "F:/pdf_auditor/src/pdf_auditor/utils/certs/cacert.pem"
 USER_AGENT = "PDFAuditorBot/1.0"
 RATE_LIMIT = 1  # seconds between requests
 MAX_CRAWL_DEPTH = 2
+
+# Domains with self-signed certificates that should skip SSL verification
+SKIP_SSL_DOMAINS = {'www.oesca.org'}
 
 # Initialize logger
 logging.basicConfig(
@@ -122,7 +129,17 @@ def scrape_pdfs(start_url: str, output_dir: str) -> None:
 
 def fetch(url: str) -> bytes:
     headers = {'User-Agent': USER_AGENT}
-    resp = requests.get(url, headers=headers, timeout=10, verify=CACERT_PATH)
+    parsed = urlparse(url)
+    
+    # Determine SSL verification strategy
+    if parsed.netloc in SKIP_SSL_DOMAINS:
+        verify_ssl = False
+    elif os.path.exists(CACERT_PATH):
+        verify_ssl = CACERT_PATH
+    else:
+        verify_ssl = True  # Use system default certificates
+    
+    resp = requests.get(url, headers=headers, timeout=10, verify=verify_ssl)
     resp.raise_for_status()
     return resp.content
 
@@ -174,20 +191,28 @@ def parse_html_links(html: str) -> list:
 def download_and_save_pdf(url: str, output_dir: Path) -> dict:
     record = {'path': None, 'status': None, 'error': None}
     try:
+        # Determine SSL verification strategy
+        parsed = urlparse(url)
+        if parsed.netloc in SKIP_SSL_DOMAINS:
+            verify_ssl = False
+        elif os.path.exists(CACERT_PATH):
+            verify_ssl = CACERT_PATH
+        else:
+            verify_ssl = True  # Use system default certificates
+        
         # HEAD check
-        h = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=10, verify=CACERT_PATH)
+        h = requests.head(url, headers={'User-Agent': USER_AGENT}, timeout=10, verify=verify_ssl)
         if 'application/pdf' not in h.headers.get('Content-Type', ''):
             record['status'] = 'skipped_non_pdf'
             logger.info(f"Skipping non-PDF: {url}")
             return record
 
         # Prepare local path
-        parsed = urlparse(url)
         local_path = output_dir / parsed.path.lstrip('/')
         local_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Download
-        with requests.get(url, headers={'User-Agent': USER_AGENT}, stream=True, timeout=20, verify=CACERT_PATH) as r:
+        with requests.get(url, headers={'User-Agent': USER_AGENT}, stream=True, timeout=20, verify=verify_ssl) as r:
             r.raise_for_status()
             with open(local_path, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192):
